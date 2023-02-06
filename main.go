@@ -107,6 +107,29 @@ func run(args *Args, u *user.User) error {
 			}
 		}
 	}
+
+	// print list of databases from config file and exit
+	if args.List {
+		DbList, err := listDBAliasesFromConfig(args)
+		if err != nil {
+			return nil
+		}
+
+		for _, d := range DbList {
+			fmt.Println(d)
+		}
+		os.Exit(0)
+	}
+
+	// extra wrapper to update args from config file
+	if args.DB != "" {
+		err := supplyArgsFromConfig(args)
+
+		if err != nil {
+			return err
+		}
+	}
+
 	// create input/output
 	l, err := rline.New(len(args.CommandOrFiles) != 0, args.Out, env.HistoryFile(u))
 	if err != nil {
@@ -176,4 +199,17 @@ func runCommandOrFiles(h *handler.Handler, commandsOrFiles []CommandOrFile) func
 		}
 		return nil
 	}
+}
+
+func supplyArgsFromConfig(args *Args) error {
+
+	DSN, err := GetDsnForDB(args.DB, args)
+	if err != nil {
+		return err
+	}
+
+	if DSN != "" {
+		args.DSN = DSN
+	}
+	return nil
 }

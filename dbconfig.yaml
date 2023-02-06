@@ -1,0 +1,24 @@
+databases:
+  my_handy_db_alias:        # SOME HANDY IDENTIFIER KEY TO USE IN CLI ARGS FOR --db. USEFUL WHEN TWO DB'S ACROSS HOSTS HAS SAME NAME. 
+    name: <DATABASE_NAME>   # THIS IS THE ACTUAL DATABASE NAME
+    host: <WRITER_HOST_URL> # THIS IS THE DEFAULT HOST BEING USED FOR OPERATIONS.
+    reader_host: <READER_HOST_URL> # IDEA IS TO USE THIS AUTOMATICALLY FOR READER USER ROLE. THIS IS TODO FOR NOW.
+    port: <DB_PORT>
+    db_type: <DATABASE_TYPE> # THIS IS DIRECT RELATED TO USQL DRIVER NAMES. THE SCHEME PART OF DSN.
+    credentials:
+      - username: root
+        role: admin         # USED IN CLI ARGS FOR --role.
+        password: <PASSWORD>
+      - username: reader
+        role: reader       # IDEA OF ROLES IS TO SEGREGATE USERS AND PROVIDE ABILITY TO HAVE MULTIPLE USERS IN CONFIG FOR USAGE.
+        password: <PASSWORD>
+  another_db:
+    name: my_database
+    host: my_db_host
+    reader_host: my_db_host_ro
+    port: 5432
+    db_type: postgres
+    credentials:
+      - username: admin
+        role: admin
+        password: "%super_password%"

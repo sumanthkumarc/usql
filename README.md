@@ -47,6 +47,29 @@ for other databases.
 [databases]: #database-support (Database Support)
 [releases]: https://github.com/xo/usql/releases (Releases)
 
+## Differences from upstream
+
+This fork has only one important difference from upstream. This fork adds ability to provide a database configuration file to uql and helps logging to databases with just name and user to login.
+
+so essentially after this the command changes from 
+
+```
+usql SCHEME://my_user:my_pass@my_datbase.my_company.com/database_name
+```
+
+to
+
+```
+usql --db=database_name --role=my_user
+```
+
+**NOTE:** The below command expects the database config file `.dbconfig.yaml`. It looks in following order - 
+
+1. To be present in current working directory of invocation, with default name `.dbconfig.yaml`.
+2. Looks at ENV variable - `USQL_DB_CONFIG` for the path including the file name to read.
+3. Looks at current user home directory with default name `.dbconfig.yaml`
+
+
 ## Installing
 
 `usql` can be installed [via Release][], [via Homebrew][], [via AUR][], [via

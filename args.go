@@ -28,6 +28,12 @@ type Args struct {
 	SingleTransaction bool
 	Variables         []string
 	PVariables        []string
+
+	// Support for config file
+	ConfigFilePath string
+	DB             string
+	Role           string
+	List           bool
 }
 
 func (args *Args) Next() (string, bool, error) {
@@ -99,6 +105,13 @@ func NewArgs() *Args {
 	kingpin.Flag("password", "force password prompt (should happen automatically)").Short('W').BoolVar(&args.ForcePassword)
 	kingpin.Flag("single-transaction", "execute as a single transaction (if non-interactive)").Short('1').BoolVar(&args.SingleTransaction)
 	kingpin.Flag("set", "set variable NAME to VALUE").Short('v').PlaceHolder(", --variable=NAME=VALUE").StringsVar(&args.Variables)
+
+	// Custom wrapper args for config file
+	kingpin.Flag("config", "Databases config yaml file path").PlaceHolder("/path/to/config.yaml").StringVar(&args.ConfigFilePath)
+	kingpin.Flag("db", "Database name to login. Should be present in config file").PlaceHolder("test").StringVar(&args.DB)
+	kingpin.Flag("role", "user role to use for logging into given DB").PlaceHolder("reader").StringVar(&args.Role)
+	kingpin.Flag("list", "List available databases from config").BoolVar(&args.List)
+
 	// pset
 	kingpin.Flag("pset", `set printing option VAR to ARG (see \pset command)`).Short('P').PlaceHolder("VAR[=ARG]").StringsVar(&args.PVariables)
 	// pset flags
