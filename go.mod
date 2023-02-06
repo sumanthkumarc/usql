@@ -55,6 +55,7 @@ require (
 	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e
 	github.com/yookoala/realpath v1.0.0
 	github.com/ziutek/mymysql v1.5.4
+	gopkg.in/yaml.v2 v2.4.0
 	gorm.io/driver/bigquery v1.1.0
 	modernc.org/ql v1.4.4
 	modernc.org/sqlite v1.20.2
@@ -262,7 +263,6 @@ require (
 	gopkg.in/jcmturner/dnsutils.v1 v1.0.1 // indirect
 	gopkg.in/jcmturner/gokrb5.v6 v6.1.1 // indirect
 	gopkg.in/jcmturner/rpc.v1 v1.1.0 // indirect
-	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	howett.net/plist v1.0.0 // indirect
 	lukechampine.com/uint128 v1.2.0 // indirect
